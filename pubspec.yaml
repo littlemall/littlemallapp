@@ -20,14 +20,47 @@ dependencies:
   flutter:
     sdk: flutter
 
+  fluro: "^1.4.0"
+  # Http 接口请求
+  dio: ^1.0.13
+  # 检查wifi网络
+  connectivity: ^0.4.4
+   # 提供客户端user agent
+  flutter_user_agent: ^1.0.1
+  # AzListView，Flutter 城市列表，联系人列表，自定义Header，索引，悬停效果。
+  azlistview: ^0.1.2
+  # 日期格式刷插件
+  date_format: ^1.0.6
+  # lpinyin (汉字转拼音Flutter版) #
+  lpinyin: ^1.0.7
+  # json 转化model 插件
+  json_annotation: ^2.4.0
+  # flutter svg plugins
+  flutter_svg: ^0.14.2
+  # flutter pin input plugins
+  pin_input_text_field: ^2.0.2
+  # flutter 状态栏
+  flutter_statusbarcolor: ^0.2.2
+  # 常用工具类
+  flustars: ^0.2.6+1
+
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
+  rubber: ^0.4.0
+  loader_search_bar: ^1.0.3+3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+ # json 转化model 插件  
+  build_runner: ^1.6.0
+  # json 转化model 插件
+  json_serializable: ^3.0.0
+  # tost plugins
+  toast: ^0.1.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
