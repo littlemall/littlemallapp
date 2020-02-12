@@ -6,10 +6,17 @@ class BootPage extends StatefulWidget {
 }
 
 class _BootPageState extends State<BootPage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.redAccent,
         title: Text('Home Page'),
       ),
       body: Container(
