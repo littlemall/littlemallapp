@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:littlemallapp/routers/application.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BootPage extends StatefulWidget {
@@ -51,7 +52,7 @@ class _BootPageState extends State<BootPage> {
                           ),
                           child: RaisedButton(
                             onPressed: () {
-                         
+                              Application.router.navigateTo(context, '/custom/login');
                             },
                             child: Text('邮箱登录',
                                 style: TextStyle(
