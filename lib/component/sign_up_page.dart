@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:littlemallapp/data/repo.dart';
 import 'package:littlemallapp/store/sign_up_page_store.dart';
 import 'package:littlemallapp/style/theme.dart' as theme;
 import 'package:provider/provider.dart';
@@ -60,12 +61,16 @@ class _SignUpPageState extends State<SignUpPage> {
                     String password2 =
                         Provider.of<SignUpPageStore>(context, listen: false)
                             .password2;
-             
-                    if(password !=password2){
+
+                    if (password != password2) {
                       // 弹出提示
                       Fluttertoast.showToast(msg: '密码不一致!,请重新输入');
-                    }else{
+                    } else {
                       // 提交创建用户接口
+                      Repo().register({"email": emial, "password": password},
+                          context: context).then((re) {
+                        print(re);
+                      });
                     }
                   },
                 ),

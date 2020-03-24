@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_user_agent/flutter_user_agent.dart';
 import 'package:littlemallapp/config/config.dart';
+
 class Http {
   static Http instance;
 
@@ -26,27 +27,25 @@ class Http {
     return instance;
   }
 
-  static getRequest(url,
-      {Object params, noTip = false, BuildContext context}) async {
+  getRequest(url, {Object params, noTip = false, BuildContext context}) async {
     Options option = new Options(method: "get");
     return await requestBase(url, baseHeaders, option,
         params: params, noTip: noTip, context: context);
   }
 
-  static postRequest(url, params, {noTip = false, BuildContext context}) async {
+  postRequest(url, params, {noTip = false, BuildContext context}) async {
     Options option = new Options(method: "post");
     return await requestBase(url, baseHeaders, option,
         params: params, noTip: noTip, context: context);
   }
 
-  static putRequest(url, params, {noTip = false, BuildContext context}) async {
+  putRequest(url, params, {noTip = false, BuildContext context}) async {
     Options option = new Options(method: "put");
     return await requestBase(url, baseHeaders, option,
         params: params, noTip: noTip, context: context);
   }
 
-  static deleteRequest(url, params,
-      {noTip = false, BuildContext context}) async {
+  deleteRequest(url, params, {noTip = false, BuildContext context}) async {
     Options option = new Options(method: "delete");
     return await requestBase(url, baseHeaders, option,
         params: params, noTip: noTip, context: context);
