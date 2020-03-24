@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:littlemallapp/store/sign_up_page_store.dart';
 import 'package:littlemallapp/style/theme.dart' as theme;
 import 'package:provider/provider.dart';
 
@@ -16,24 +18,23 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, signUpStore, _) {
-      signUpStore = signUpStore;
-      return Container(
-          padding: EdgeInsets.only(top: 23),
-          child: Stack(
-            alignment: Alignment.topCenter,
-            overflow: Overflow.visible,
-            children: <Widget>[
-              Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    color: Colors.white,
-                  ),
-                  width: 300,
-                  height: 360,
-                  child: buildSignUpTextForm()),
-              Positioned(
-                child: Center(
+    return Container(
+        padding: EdgeInsets.only(top: 23),
+        child: Stack(
+          alignment: Alignment.topCenter,
+          overflow: Overflow.visible,
+          children: <Widget>[
+            Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  color: Colors.white,
+                ),
+                width: 300,
+                height: 360,
+                child: buildSignUpTextForm()),
+            Positioned(
+              child: Center(
+                child: InkWell(
                   child: Container(
                     padding: EdgeInsets.only(
                         top: 10, bottom: 10, left: 42, right: 42),
@@ -46,12 +47,33 @@ class _SignUpPageState extends State<SignUpPage> {
                       style: TextStyle(fontSize: 25, color: Colors.white),
                     ),
                   ),
+                  onTap: () {
+                    String name =
+                        Provider.of<SignUpPageStore>(context, listen: false)
+                            .name;
+                    String emial =
+                        Provider.of<SignUpPageStore>(context, listen: false)
+                            .emial;
+                    String password =
+                        Provider.of<SignUpPageStore>(context, listen: false)
+                            .password;
+                    String password2 =
+                        Provider.of<SignUpPageStore>(context, listen: false)
+                            .password2;
+             
+                    if(password !=password2){
+                      // 弹出提示
+                      Fluttertoast.showToast(msg: '密码不一致!,请重新输入');
+                    }else{
+                      // 提交创建用户接口
+                    }
+                  },
                 ),
-                top: 340,
-              )
-            ],
-          ));
-    });
+              ),
+              top: 340,
+            )
+          ],
+        ));
   }
 
   Widget buildSignUpTextForm() {
@@ -65,6 +87,10 @@ class _SignUpPageState extends State<SignUpPage> {
             padding:
                 const EdgeInsets.only(left: 25, right: 25, top: 20, bottom: 20),
             child: TextFormField(
+              onChanged: (value) {
+                Provider.of<SignUpPageStore>(context, listen: false)
+                    .setName(value);
+              },
               decoration: InputDecoration(
                   icon: Icon(
                     FontAwesomeIcons.user,
@@ -87,6 +113,10 @@ class _SignUpPageState extends State<SignUpPage> {
             padding:
                 const EdgeInsets.only(left: 25, right: 25, top: 20, bottom: 20),
             child: TextFormField(
+              onChanged: (value) {
+                Provider.of<SignUpPageStore>(context, listen: false)
+                    .setEmail(value);
+              },
               decoration: InputDecoration(
                   icon: Icon(
                     Icons.email,
@@ -109,6 +139,10 @@ class _SignUpPageState extends State<SignUpPage> {
             padding:
                 const EdgeInsets.only(left: 25, right: 25, top: 20, bottom: 20),
             child: TextFormField(
+              onChanged: (value) {
+                Provider.of<SignUpPageStore>(context, listen: false)
+                    .setPassword(value);
+              },
               decoration: InputDecoration(
                 icon: Icon(
                   Icons.lock,
@@ -139,6 +173,10 @@ class _SignUpPageState extends State<SignUpPage> {
             padding:
                 const EdgeInsets.only(left: 25, right: 25, top: 20, bottom: 20),
             child: TextFormField(
+              onChanged: (value) {
+                Provider.of<SignUpPageStore>(context, listen: false)
+                    .setPassword2(value);
+              },
               decoration: InputDecoration(
                 icon: Icon(
                   Icons.lock,
