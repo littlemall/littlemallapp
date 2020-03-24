@@ -4,6 +4,7 @@ import 'package:littlemallapp/pages/boot_page.dart';
 import 'package:littlemallapp/pages/splash_page.dart';
 import 'package:littlemallapp/routers/application.dart';
 import 'package:littlemallapp/routers/routes.dart';
+import 'package:littlemallapp/store/login_page_store.dart';
 import 'package:littlemallapp/store/sign_up_page_store.dart';
 import 'package:littlemallapp/store/splash_page_store.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => SplashPageStore()),
         ChangeNotifierProvider(create: (_) => SignUpPageStore()),
+        ChangeNotifierProvider(create: (_) => LoginPageStore()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

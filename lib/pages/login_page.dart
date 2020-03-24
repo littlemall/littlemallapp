@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:littlemallapp/component/sign_in_page.dart';
 import 'package:littlemallapp/component/sign_up_page.dart';
+import 'package:littlemallapp/store/login_page_store.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:littlemallapp/style/theme.dart' as theme;
 
@@ -24,10 +26,12 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
     _pageView = PageView(
       controller: _pageController,
       children: <Widget>[
-        SignInPage(),
-        SignUpPage(),
+        SignInPage(controlCurrentIndex: (index) => _controlCurrentIndex(index)),
+        SignUpPage(controlCurrentIndex: (index) => _controlCurrentIndex(index)),
       ],
       onPageChanged: (index) {
+        Provider.of<LoginPageStore>(context, listen: false)
+            .setCurrentIndex(index);
         setState(() {
           _currentPage = index;
         });
@@ -37,6 +41,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    _currentPage =
+        Provider.of<LoginPageStore>(context, listen: false).currentIndex;
     return Scaffold(
         /**
        * SafeArea，让内容显示在安全的可见区域
@@ -106,6 +112,9 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                 _pageController.animateToPage(0,
                                     duration: Duration(milliseconds: 500),
                                     curve: Curves.decelerate);
+                                Provider.of<LoginPageStore>(context,
+                                        listen: false)
+                                    .setCurrentIndex(0);
                               },
                               child: Text(
                                 "老用户",
@@ -130,6 +139,9 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                 _pageController.animateToPage(1,
                                     duration: Duration(milliseconds: 500),
                                     curve: Curves.decelerate);
+                                Provider.of<LoginPageStore>(context,
+                                        listen: false)
+                                    .setCurrentIndex(1);
                               },
                               child: Text(
                                 "新用户",
@@ -147,5 +159,14 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 ],
               ))),
     ));
+  }
+
+  _controlCurrentIndex(editText) {
+    setState(() {
+      _pageController.animateToPage(editText,
+          duration: Duration(milliseconds: 500), curve: Curves.decelerate);
+      Provider.of<LoginPageStore>(context, listen: false)
+          .setCurrentIndex(editText);
+    });
   }
 }

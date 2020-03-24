@@ -6,6 +6,8 @@ import 'package:littlemallapp/style/theme.dart' as theme;
  *注册界面
  */
 class SignInPage extends StatefulWidget {
+    final controlCurrentIndex;
+  const SignInPage({Key key, this.controlCurrentIndex}) : super(key: key);
   @override
   _SignInPageState createState() =>  _SignInPageState();
 }

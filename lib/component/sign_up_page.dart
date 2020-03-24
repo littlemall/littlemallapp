@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:littlemallapp/data/repo.dart';
+import 'package:littlemallapp/model/success_res.dart';
+import 'package:littlemallapp/store/login_page_store.dart';
 import 'package:littlemallapp/store/sign_up_page_store.dart';
 import 'package:littlemallapp/style/theme.dart' as theme;
 import 'package:provider/provider.dart';
@@ -10,6 +12,8 @@ import 'package:provider/provider.dart';
  * 注册界面
  */
 class SignUpPage extends StatefulWidget {
+  final controlCurrentIndex;
+  const SignUpPage({Key key, this.controlCurrentIndex}) : super(key: key);
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
@@ -69,7 +73,15 @@ class _SignUpPageState extends State<SignUpPage> {
                       // 提交创建用户接口
                       Repo().register({"email": emial, "password": password},
                           context: context).then((re) {
-                        print(re);
+                        success_res res = success_res.fromJson(re);
+                        if (res.code == 200) {
+                          Fluttertoast.showToast(msg: "注册成功！");
+                          Future.delayed(Duration(milliseconds: 2000), () {
+                            widget.controlCurrentIndex(0);
+                          });
+                        }else{
+                           Fluttertoast.showToast(msg: "注册失败！");
+                        }
                       });
                     }
                   },
