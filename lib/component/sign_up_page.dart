@@ -71,7 +71,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       Fluttertoast.showToast(msg: '密码不一致!,请重新输入');
                     } else {
                       // 提交创建用户接口
-                      Repo().register({"email": emial, "password": password},
+                      Repo().register(
+                          {"name": name, "email": emial, "password": password},
                           context: context).then((re) {
                         success_res res = success_res.fromJson(re);
                         if (res.code == 200) {
@@ -79,8 +80,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           Future.delayed(Duration(milliseconds: 2000), () {
                             widget.controlCurrentIndex(0);
                           });
-                        }else{
-                           Fluttertoast.showToast(msg: "注册失败！");
+                        } else {
+                          Fluttertoast.showToast(msg: "注册失败！");
                         }
                       });
                     }

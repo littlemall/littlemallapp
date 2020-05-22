@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:littlemallapp/style/theme.dart' as theme;
+import 'package:littlemallapp/data/repo.dart';
+import 'package:provider/provider.dart';
+import 'package:littlemallapp/store/sign_up_page_store.dart';
+import 'package:littlemallapp/model/success_res.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /**
  *注册界面
@@ -179,13 +184,26 @@ class _SignInPageState extends State<SignInPage> {
             "登录", style:  TextStyle(fontSize: 25, color: Colors.white),),
         ),
         onTap: () {
+            String emial = Provider.of<SignUpPageStore>(context, listen: false).emial;
+            String password =Provider.of<SignUpPageStore>(context, listen: false).password;
           /**利用key来获取widget的状态FormState
-              可以用过FormState对Form的子孙FromField进行统一的操作
+           * 可以用过FormState对Form的子孙FromField进行统一的操作
            */
           if (_SignInFormKey.currentState.validate()) {
             //如果输入都检验通过，则进行登录操作
-            Scaffold.of(context).showSnackBar(
-                 SnackBar(content:  Text("执行登录操作")));
+            // Scaffold.of(context).showSnackBar(SnackBar(content:  Text("执行登录操作")));
+            Repo().login({
+              "email":emial,
+              "password":password
+            }).then((re) async{
+              success_res res = success_res.fromJson(re);
+              if(res.code == 200){
+                 print(res.data);
+              }
+              // SharedPreferences spf = await SharedPreferences.getInstance();
+              // spf.setString('token', value)
+              Scaffold.of(context).showSnackBar(SnackBar(content:  Text("登录成功!")));
+            });
             //调用所有自孩子的save回调，保存表单内容
             _SignInFormKey.currentState.save();
           }
