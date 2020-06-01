@@ -212,6 +212,8 @@ class _SignInPageState extends State<SignInPage> {
             if (res.code == 200) {
               SharedPreferences spf = await SharedPreferences.getInstance();
               spf.setString('token', res.data.token);
+              spf.setString('isLogin', 'true');
+              
               Scaffold.of(context)
                   .showSnackBar(SnackBar(content: Text("登录成功!")));
             }
