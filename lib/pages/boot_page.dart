@@ -69,10 +69,10 @@ class _BootPageState extends State<BootPage> {
               ])));
     } else {
       return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.redAccent,
-          title: Text('Home Page'),
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: Colors.redAccent,
+        //   title: Text('Little mall'),
+        // ),
         body: Container(
           alignment: Alignment.center,
           child: Text('boot!!!'),
